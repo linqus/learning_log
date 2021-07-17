@@ -4,7 +4,7 @@
   <p>Tematy</p>
 <ul>
 	{% for topic in topics %}
-	<li>{{ topic }}</li>
+	<li><a href="{% url 'learning_logs_app:temat' topic.id %}">{{ topic }}</a></li>
 	{% empty %}
 	<li>Nie dodano żadnych tematów</li>
 	{% endfor %}
