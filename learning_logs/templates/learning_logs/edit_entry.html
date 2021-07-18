@@ -1,0 +1,11 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+
+<p>Edycja wpisu z kategorii: <a href="{% url 'learning_logs_app:temat' temat.id %}">{{ temat.text }}</a></p>
+<form action="{% url 'learning_logs_app:edycja_wpisu' wpis.id %}" method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Zmień wpis</button>
+</form>
+{% endblock content %}

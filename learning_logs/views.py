@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm,EntryForm
 
 # Create your views here.
@@ -46,3 +46,17 @@ def new_entry(request,id_tematu):
 			return redirect('learning_logs_app:temat',id_tematu=id_tematu)
 	context = {'topic':topic,'form':form}
 	return render(request,'learning_logs/new_entry.html',context)
+
+def edit_entry(request,id_wpisu):
+	entry = Entry.objects.get(id=id_wpisu)
+	topic = entry.topic
+	if request.method != 'POST':
+		form = EntryForm(instance=entry)
+	else:
+		form = EntryForm(instance=entry,data=request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('learning_logs_app:temat',id_tematu=topic.id)
+
+	context = {'temat':topic,'wpis':entry,'form':form}
+	return render(request,'learning_logs/edit_entry.html',context)

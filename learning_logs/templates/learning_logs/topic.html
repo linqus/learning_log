@@ -7,7 +7,7 @@
 <ul>
 {% for wpis in wpisy %}
 	<li>
-		<p>{{ wpis.date_added|date:'Y-M-d H:i' }}</p>
+		<p>{{ wpis.date_added|date:'Y-M-d H:i' }} <a href="{% url 'learning_logs_app:edycja_wpisu' wpis.id %}">Edytuj wpis</a></p>
 		<p>{{ wpis.text | linebreaks }}</p>
 	</li>
 {% empty %}
