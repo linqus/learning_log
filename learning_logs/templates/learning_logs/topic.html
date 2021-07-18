@@ -3,7 +3,7 @@
 {% block content %}
 
 <p>{{ temat }}</p>
-
+<a href="{% url 'learning_logs_app:nowy_wpis' temat.id %} ">Dodaj nowy wpis</a>
 <ul>
 {% for wpis in wpisy %}
 	<li>
@@ -14,4 +14,7 @@
 	<li>Brak wpisów w tym temacie</li>
 {% endfor %}
 </ul>
+
+
+
 {% endblock content %}
