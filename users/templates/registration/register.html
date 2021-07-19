@@ -1,0 +1,19 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<p>Wyloguj się z bieżącego konta aby założyć nowe</p>
+{% else %}
+
+<form action="{% url 'użytkownik:rejestracja' %}" method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+
+
+<button type="submit">Zarejestruj</button>
+</form>
+{% endif %}
+
+
+{% endblock content %}
