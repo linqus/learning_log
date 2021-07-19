@@ -1,6 +1,11 @@
 <p>
 	<a href="{% url 'learning_logs_app:index' %}">Learning Log</a> - 
 	<a href="{% url 'learning_logs_app:tematy' %}">Tematy</a>
+{% if user.is_authenticated %}
+Witaj {{ user.username }} <a href="{% url 'użytkownik:logout' %}">Wyloguj się</a>
+{% else %}
+<a href="{% url 'użytkownik:login' %}">Zaloguj się</a>
+{% endif %}
 </p>
 
 {% block content %} {% endblock content %}
