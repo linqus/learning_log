@@ -42,7 +42,9 @@ def new_topic(request):
 @login_required
 def new_entry(request,id_tematu):
 	topic = Topic.objects.get(id=id_tematu)
-
+	if topic.owner != request.user:
+		raise Http404
+		
 	if request.method != 'POST':
 		form = EntryForm()
 	else:
