@@ -1,13 +1,55 @@
-<p>
-	<a href="{% url 'learning_logs_app:index' %}">Learning Log</a> - 
-	<a href="{% url 'learning_logs_app:tematy' %}">Tematy</a>
-{% if user.is_authenticated %}
-	Witaj {{ user.username }} 
-	<a href="{% url 'użytkownik:logout' %}">Wyloguj się</a>
-{% else %}
-	<a href="{% url 'użytkownik:login' %}">Zaloguj się</a>
-	<a href="{% url 'użytkownik:rejestracja' %}">Zarejestruj się</a>
-{% endif %}
-</p>
+{% load bootstrap4 %}
 
-{% block content %} {% endblock content %}
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Learning Log</title>
+
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery='full' %}
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+		<a class="navbar-brand" href="{% url 'learning_logs_app:index' %}">Learning Log</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
+		aria-controls="navbar-Collapse" aria-expanded="false" aria-label="Przełącz nawigację">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a href="{% url 'learning_logs_app:tematy' %}">Tematy</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
+				<li class="nav-item">
+					<span class="navbar-text">Witaj, {{ user.username }}</span>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'użytkownik:logout' %}">Wyloguj się</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'użytkownik:login' %}">Zaloguj</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'użytkownik:rejestracja' %}">Zarejestruj się</a>
+				</li>
+				{% endif %}
+			</ul>			
+		</div>
+	</nav>
+
+	<main role="main" class="container">
+		<div class="pb-2 mb-2 border-bottom">
+			{% block page_header %}{% endblock page_header %} 
+		</div>
+		<div>
+			{% block content %}{% endblock content %}
+		</div>
+	</main>
+</body>
+</html>
