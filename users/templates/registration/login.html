@@ -1,0 +1,17 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+	<p>Użytkownik lub hasło nie zgadzają się. Spróbuj jeszcze raz.</p>
+{% endif %}
+
+<form action="{% url 'użytkownik:login' %}" method="POST">
+{% csrf_token %}
+{{ form.as_p}}
+	<button type="submit">Zaloguj</button>
+	<input type="hidden" name="next" value="{% url 'learning_logs_app:index' %}">
+</form>	
+
+
+{% endblock content %}
