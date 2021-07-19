@@ -1,25 +1,27 @@
 from django.shortcuts import render, redirect
 from .models import Topic, Entry
 from .forms import TopicForm,EntryForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def index(request):
 	return render(request,'learning_logs/index.html')
 
+@login_required
 def topics(request):
 	topics = Topic.objects.order_by('date_added')
 	context = {'topics':topics}
 	return render(request,'learning_logs/topics.html',context)
 
-
+@login_required
 def topic(request,**kwargs):
 	topic = Topic.objects.get(id=kwargs['id_tematu'])
 	entries = topic.entry_set.order_by('-date_added')
 	context ={'temat': topic, 'wpisy':entries} 
 	return render(request,'learning_logs/topic.html',context)
 
-
+@login_required
 def new_topic(request):
 	if request.method != 'POST':
 		form = TopicForm()
@@ -32,6 +34,7 @@ def new_topic(request):
 	context = {'form':form}
 	return render(request,'learning_logs/new_topic.html',context)
 
+@login_required
 def new_entry(request,id_tematu):
 	topic = Topic.objects.get(id=id_tematu)
 
@@ -47,6 +50,7 @@ def new_entry(request,id_tematu):
 	context = {'topic':topic,'form':form}
 	return render(request,'learning_logs/new_entry.html',context)
 
+@login_required
 def edit_entry(request,id_wpisu):
 	entry = Entry.objects.get(id=id_wpisu)
 	topic = entry.topic
