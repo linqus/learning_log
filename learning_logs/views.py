@@ -4,8 +4,6 @@ from .forms import TopicForm,EntryForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-# Create your views here.
-
 def index(request):
 	return render(request,'learning_logs/index.html')
 
