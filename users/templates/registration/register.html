@@ -1,19 +1,17 @@
 {% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+	<h2>Zarejestruj się</h2>
+{% endblock page_header %}
 
 {% block content %}
+	<form class="form" action="{% url 'użytkownik:rejestracja' %}" method="POST">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button class="btn btn-primary" type="submit">Zarejestruj</button>
+		{% endbuttons %}
 
-{% if user.is_authenticated %}
-<p>Wyloguj się z bieżącego konta aby założyć nowe</p>
-{% else %}
-
-<form action="{% url 'użytkownik:rejestracja' %}" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-
-
-<button type="submit">Zarejestruj</button>
-</form>
-{% endif %}
-
-
+	</form>
 {% endblock content %}

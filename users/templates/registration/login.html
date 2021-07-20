@@ -1,17 +1,18 @@
 {% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+	<h2>Zaloguj się na swoje konto</h2> 
+{% endblock page_header %}
 
 {% block content %}
-
-{% if form.errors %}
-	<p>Użytkownik lub hasło nie zgadzają się. Spróbuj jeszcze raz.</p>
-{% endif %}
-
-<form action="{% url 'użytkownik:login' %}" method="POST">
-{% csrf_token %}
-{{ form.as_p}}
-	<button type="submit">Zaloguj</button>
-	<input type="hidden" name="next" value="{% url 'learning_logs_app:index' %}">
-</form>	
-
-
+	<form class="form" action="{% url 'użytkownik:login' %}" method="POST">
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button class="btn btn-primary" type="submit">Zaloguj</button>
+		{% endbuttons %}
+		<input type="hidden" name="next" value="{% url 'learning_logs_app:index' %}">
+	</form>	
 {% endblock content %}
+

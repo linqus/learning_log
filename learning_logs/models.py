@@ -22,4 +22,4 @@ class Entry(models.Model):
 		if len(self.text)>50:
 			return f'{self.text[:50]}...'
 		else:
-			return self.text[:50]
+			return self.text

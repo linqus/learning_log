@@ -1,12 +1,16 @@
 {% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+	<h2>Dodaj nowy wpis </h2>
+	<small>w temacie {{ topic }}</small>
+{% endblock page_header %}
 
 {% block content %}
-<p>Dodaj nowy wpis o tematyce:{{ topic }}</p>
-
-<form action="{% url 'learning_logs_app:nowy_wpis' topic.id %}" method="POST">
+<form class="form" action="{% url 'learning_logs_app:nowy_wpis' topic.id %}" method="POST">
 	{% csrf_token %}
-	{{ form.as_p }}
+	{% bootstrap_form form %}
 
-<button type="submit">Dodaj</button>
+<button class="btn btn-primary" type="submit">Dodaj</button>
 </form>
 {% endblock content %}
